@@ -1,8 +1,11 @@
 # My dotfiles
 
 1. install [antigen](https://github.com/zsh-users/antigen)
+
     ``$ mkdir ~/.antigen``
+
     ``$ git clone https://github.com/zsh-users/antigen.git ~/.antigen/``
+
 2. install [rcm](https://github.com/thoughtbot/rcm)
     Mac:
         ``$ brew tap thoughtbot/formulae``
