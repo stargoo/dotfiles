@@ -24,12 +24,13 @@
 
 4. install [tpm](https://github.com/tmux-plugins/tpm)
 
+5. install antiword
 
-5. clone this repository
+6. clone this repository
 
      ``$ git clone https://github.com/stargoo/dotfiles/ ~/.dotfiles``
 
-6. run ``rcup -v``
+7. run ``rcup -v``
 
 
 ## TODO

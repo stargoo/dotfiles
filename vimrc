@@ -1,3 +1,5 @@
+" This is mostly modified from ProVim:
+" https://github.com/Integralist/ProVim
 " Settings {{{
 " Switch syntax highlighting on, when the terminal has colors
 syntax on
@@ -59,7 +61,7 @@ set shiftwidth=4
 set number
 
 " Highlight tailing whitespace
-set list listchars=tab:\ \ ,trail:·
+"set list listchars=tab:\ \ ,trail:·
 
 " Get rid of the delay when pressing O (for example)
 " http://stackoverflow.com/questions/2158516/vim-delay-before-o-opens-a-new-line
@@ -116,25 +118,28 @@ let g:netrw_liststyle=3
 " }}}
 
 " Plugins {{{
-"execute pathogen#infect()
-"filetype plugin indent on " required by Pathogen Plugin Manager
 
 set nocompatible
 filetype off
-" set the runtime path to include Vundle and initialize
+
+"set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
+"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" fast search of files
+" silver searcher
+Plugin 'rking/ag.vim'
+" quick file searching
 Plugin 'ctrlpvim/ctrlp.vim'
+" extend ctrlp
+Plugin 'tachiroy/ctrlp-funky'
+" treat camelCase as separate words
+Plugin 'bkad/CamelCaseMotion'
 " zoom into windows
 Plugin 'vim-scripts/ZoomWin'
-" ag
-Plugin 'rking/ag.vim'
 " tab completion
 Plugin 'ervandew/supertab'
 " alignment
@@ -153,25 +158,56 @@ Plugin 'tpope/vim-commentary'
 Plugin 'plasticboy/vim-markdown'
 " syntax and indenting for all languages
 Plugin 'sheerun/vim-polyglot'
-" repeat commadn with other plugins
+" repeat command with other plugins
 Plugin 'tpope/vim-repeat'
+"for sane copy and pasting
+Plugin 'svermeulen/vim-easyclip'
 " easily surround text with brackets/quotes/etc
 Plugin 'tpope/vim-surround'
-
+" for intellisense
+Plugin 'vim-scripts/OmniCppComplete'
+" netrw enhancements
+Plugin 'tpope/vim-vinegar'
+" diff two parts of same file
+Plugin 'AndrewRadev/linediff.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+set nocp
 filetype plugin indent on    " required
 
+let g:airline_theme='solarized'
 
-" Theme
+" -- optional --
+" auto close options when exiting insert mode
+"autocmd CompleteDone * if pumvisible() == 0|pclose|endif
+"autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|pclose|endif
+set splitbelow
+set splitright
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menu,preview,longest
+" -- configs --
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+" -- ctags --
+" map <ctrl>+F12 to generate ctags for current folder:
+nnoremap cct :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
+" add current directory's generated tags file to available tags
+map act :set tags+=./tags <CR>
+
+
+"Theme
 set background=dark
 colorscheme solarized
 
 " CtrlP
-map <leader>t <C-p>
-map <leader>y :CtrlPBuffer<cr>
+"map <leader>t <C-p>
+"map <leader>y :CtrlPBuffer<cr>
 let g:ctrlp_show_hidden=1
-let g:ctrlp_working_path_mode=0
+let g:ctrlp_working_path_mode='r'
 let g:ctrlp_max_height=30
 
 " CtrlP -> override <C-o> to provide options for how to open files
@@ -187,24 +223,23 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
 
+" CtrlP set a root marker for where to search
+let g:ctrlp_root_markers=['.ctrlp']
 " Ack (uses Ag behind the scenes)
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Airline (status line)
 set guifont=Source\ Code\ Pro\ Light:h14
+" Airline (status line)
 let g:airline_powerline_fonts = 1
-
-" Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#whitespace#symbol = '!'
 
 " Gist authorisation settings
-let g:github_user = $GITHUB_USER
-let g:github_token = $GITHUB_TOKEN
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
+" let g:github_user = $GITHUB_USER
+" let g:github_token = $GITHUB_TOKEN
+" let g:gist_detect_filetype = 1
+" let g:gist_open_browser_after_post = 1
 " Related plugins:
 " https://github.com/mattn/webapi-vim
 " https://github.com/vim-scripts/Gist.vim
@@ -214,13 +249,13 @@ let g:gist_open_browser_after_post = 1
 " NORMAL mode Ctrl+y then , <C-y,>
 
 " Git gutter
-let g:gitgutter_enabled = 1
-let g:gitgutter_eager = 0
-let g:gitgutter_sign_column_always = 1
-highlight clear SignColumn
+" let g:gitgutter_enabled = 1
+" let g:gitgutter_eager = 0
+" let g:gitgutter_sign_column_always = 1
+" highlight clear SignColumn
 
 " Searching the file system
-map <leader>' :NERDTreeToggle<cr>
+"map <leader>' :NERDTreeToggle<cr>
 
 " Tabularize
 map <Leader>e :Tabularize /=<cr>
@@ -260,11 +295,14 @@ inoremap <leader>k <Esc>:m .-2<CR>==gi
 vnoremap <leader>j :m '>+1<CR>gv=gv
 vnoremap <leader>k :m '<-2<CR>gv=gv
 
+" finish searching (remove highlights)
+nnoremap <leader>f :nohl<cr>
+
 vnoremap j j$
 vnoremap G G$
 
 " last word to all UPPERS in insert mode
-inoremap <c-u> <esc>viwUA
+"inoremap <c-u> <esc>viwUA
 
 " word under CURSOR to all UPPERS in normal mode
 nnoremap <c-U> viwU
@@ -333,7 +371,9 @@ map <Leader>ws :ChooseWin<cr>
 " }}}
 
 " Commands {{{
-" //sbg
+autocmd BufReadPre *.doc set ro
+autocmd BufReadPre *.doc set hlsearch!
+autocmd BufReadPost *.doc %!antiword "%"
 " change cursor shape between insert and normal mode in iTerm2.app
 " if $TERM_PROGRAM =~ "iTerm.app"
 let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
@@ -354,6 +394,7 @@ nnoremap  c> :call AddBold()<CR>
 inoremap jk <esc>
 " //sbg
 
+autocmd BufNewFile,BufReadPost *.CPP,*.HPP,*.ss set filetype=cpp
 " jump to last cursor
 autocmd BufReadPost *
   \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -441,4 +482,11 @@ fun! SetDiffColors()
   highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 autocmd FilterWritePre * call SetDiffColors()
+
+" source local vimrc for propietary values
+if has("win32")
+  source ~\.dotfiles\.local.vimrc
+else
+  source ~/.dotfiles/.local.vimrc
+endif
 " }}}
