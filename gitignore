@@ -22,4 +22,4 @@ node_modules
 .sass-cache
 
 #files that could be propietary
-.exports.local.zsh
+*.local.zsh
