@@ -22,11 +22,14 @@
 
      ``$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim``
 
-4. clone this repository
+4. install [tpm](https://github.com/tmux-plugins/tpm)
+
+
+5. clone this repository
 
      ``$ git clone https://github.com/stargoo/dotfiles/ ~/.dotfiles``
 
-5. run ``rcup -v``
+6. run ``rcup -v``
 
 
 ## TODO
