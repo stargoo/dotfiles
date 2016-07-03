@@ -10,9 +10,9 @@
 
     Mac:
 
-        ``$ brew tap thoughtbot/formulae``
+        $ brew tap thoughtbot/formulae
 
-        ``$ brew install rcm``
+        $ brew install rcm
 
     Linux:
 
