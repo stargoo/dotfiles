@@ -52,12 +52,6 @@ antigen bundle cp
 antigen bundle rsync
 # sudo the last command with Esc-Esc
 antigen bundle sudo
-# tmux plugin (this should autostart)
-if is_osx; then
-  ZSH_TMUX_AUTOSTART=true
-  ZSH_TMUX_ITERM2=true
-fi
-antigen bundle tmux
 # more vi stuff
 antigen bundle vi-mode
 # websearch from the command line
