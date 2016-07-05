@@ -22,5 +22,5 @@ node_modules
 .sass-cache
 
 #files that could be propietary
-*.local.zsh
 .local.vimrc
+.local.zshrc
