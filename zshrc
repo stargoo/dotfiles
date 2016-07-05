@@ -9,11 +9,9 @@ is_linux () {
   [[ $('uname') == 'Linux' ]];
 }
 is_osx () {
-      [[ $('uname') == 'Darwin' ]]
-    }
-is_ssh () {
-  [[-n "$SSH_CLIENT" ]]
+  [[ $('uname') == 'Darwin' ]]
 }
+
 
 # use the built-in command line corrections
 setopt correct
