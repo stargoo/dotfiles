@@ -54,7 +54,8 @@ antigen bundle rsync
 antigen bundle sudo
 # tmux plugin (this should autostart)
 if is_osx; then
-  ZSH_TMUX_ITERM2=false
+  ZSH_TMUX_AUTOSTART=true
+  ZSH_TMUX_ITERM2=true
 fi
 antigen bundle tmux
 # more vi stuff
