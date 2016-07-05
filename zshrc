@@ -31,7 +31,10 @@ fi
 antigen bundle Peeja/ctrl-zsh
 # for a nicer ls
 antigen bundle rimraf/k
-
+# extracting tar.gz and all permutations
+antigen bundle extract
+# suggest completions
+antigen bundle zsh-users/zsh-autosuggestions
 # the best theme for me
 antigen theme pygmalion
 antigen apply
