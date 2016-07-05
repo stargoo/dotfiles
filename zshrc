@@ -11,6 +11,9 @@ is_linux () {
 is_osx () {
       [[ $('uname') == 'Darwin' ]]
     }
+is_ssh () {
+  [[-n "$SSH_CLIENT" ]]
+}
 
 # use the built-in command line corrections
 setopt correct
@@ -35,13 +38,10 @@ antigen apply
 
 source ~/.dotfiles/.bookmarks.zsh
 
-# auto start tmux
-if [[ "$TERM" != "screen" ]]
-  # && [[ "$SSH_CONNECTION" == "" ]]; then
-  ; then
+# auto start tmux only when someone ssh's into the system
+if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" != "" ]]; then
   # Attempt to discover a detached session and attach
   # it, else create a new session
-
   WHOAMI=$(whoami)
   if tmux has-session -t $WHOAMI 2>/dev/null; then
     tmux -2 attach-session -t $WHOAMI
@@ -49,16 +49,7 @@ if [[ "$TERM" != "screen" ]]
     tmux -2 new-session -s $WHOAMI
   fi
 else
-
-  # One might want to do other things in this case,
-  # here I print my motd, but only on servers where
-  # one exists
-
-  # If inside tmux session then print MOTD
-  MOTD=/etc/motd.tcl
-  if [ -f $MOTD ]; then
-    $MOTD
-  fi
+  # One might want to do other things in this case
 fi
 
 source ~/.dotfiles/.local.zshrc
