@@ -14,9 +14,11 @@
 
         $ brew install rcm
 
-    Linux:
+    CentOS:
 
-        see repo for instructions. 
+        cd /etc/yum.repos.d/
+        wget http://download.opensuse.org/repositories/utilities/CentOS_6/utilities.repo
+        yum install rcm
 
 3. install [vundle](https://github.com/VundleVim/Vundle.vim):
 
