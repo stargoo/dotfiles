@@ -1,24 +1,37 @@
+# use antigen plugin archtiecture
 source ~/.antigen/antigen.zsh
+
+# TODO exports may be better served with a .locally sourced file
 export PATH=/usr/local/bin:$PATH
+
+# differ between linux and osx systems
 is_linux () {
   [[ $('uname') == 'Linux' ]];
 }
-
 is_osx () {
       [[ $('uname') == 'Darwin' ]]
     }
 
-    antigen use oh-my-zsh
-    ## Load various lib files
-    antigen bundle robbyrussell/oh-my-zsh lib/
-  if is_linux; then
-    antigen bundle command-not-found
-  fi
-  antigen bundle Peeja/ctrl-zsh
-  antigen bundle rimraf/k
-  antigen theme pygmalion
+# use the built-in command line corrections
+setopt correct
+# don't always have to use .dots
+setopt globdots
 
-  antigen apply
+antigen use oh-my-zsh
+## Load various lib files
+antigen bundle robbyrussell/oh-my-zsh lib/
+# add plugins here
+if is_linux; then
+  antigen bundle command-not-found
+fi
+# for going back and forth between command line and vim
+antigen bundle Peeja/ctrl-zsh
+# for a nicer ls
+antigen bundle rimraf/k
+
+# the best theme for me
+antigen theme pygmalion
+antigen apply
 
 source ~/.dotfiles/.bookmarks.zsh
 
