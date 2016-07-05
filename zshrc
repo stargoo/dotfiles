@@ -61,3 +61,4 @@ else
   fi
 fi
 
+source ~/.dotfiles/.local.zshrc
