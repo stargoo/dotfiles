@@ -92,7 +92,8 @@ if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" != "" ]]; then
 else
   # One might want to do other things in this case
 fi
-if [[ -f "~/.dotfiles/.local.zshrc" ]]; then
-  source "~/.dotfiles/.local.zshrc"
+if [[ -f "$HOME/.dotfiles/.local.zshrc" ]]; then
+  source "$HOME/.dotfiles/.local.zshrc"
 fi
+
 
