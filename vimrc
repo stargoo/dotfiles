@@ -35,7 +35,7 @@ set hlsearch
 set smartcase
 
 " Make sure any searches /searchPhrase doesn't need the \c escape character
-set ignorecase
+" set ignorecase
 
 " A buffer is marked as ‘hidden’ if it has unsaved changes, and it is not currently loaded in a window
 " if you try and quit Vim while there are hidden buffers, you will raise an error:
@@ -305,7 +305,7 @@ vnoremap G G$
 "inoremap <c-u> <esc>viwUA
 
 " word under CURSOR to all UPPERS in normal mode
-nnoremap <c-U> viwU
+nnoremap <leader><C-U> viwU
 
 " open .vimrc
 map <leader>ev :vsplit $MYVIMRC<cr>
