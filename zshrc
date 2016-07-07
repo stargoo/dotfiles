@@ -13,6 +13,10 @@ is_osx () {
   [[ $('uname') == 'Darwin' ]]
 }
 
+# below removes error when push'ing to github
+if is_linux; then
+  unset SSH_ASKPASS
+fi
 
 # use the built-in command line corrections
 setopt correct
