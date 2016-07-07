@@ -109,7 +109,7 @@ set lazyredraw
 set showmatch
 
 " Set built-in file system explorer to use layout similar to the NERDTree plugin
-let g:netrw_liststyle=3
+" let g:netrw_liststyle=3
 
 " Always highlight column 80 so it's easier to see where
 " cutoff appears on longer screens
@@ -485,12 +485,12 @@ autocmd FilterWritePre * call SetDiffColors()
 
 " source local vimrc for propietary values
 if has("win32")
-  if filereadable("~\.dotfiles\.local.vimrc")
-    source ~\.dotfiles\.local.vimrc
+  if filereadable(glob("$HOME\.dotfiles\.local.vimrc"))
+    source $HOME\.dotfiles\.local.vimrc
   endif
 else
-  if filereadable("~/.dotfiles/.local.vimrc")
-    source ~/.dotfiles/.local.vimrc
+  if filereadable(glob("$HOME/.dotfiles/.local.vimrc"))
+    source $HOME/.dotfiles/.local.vimrc
   endif
 endif
 " }}}
