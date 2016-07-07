@@ -40,7 +40,7 @@ antigen bundle rimraf/k
 # extracting tar.gz and all permutations
 antigen bundle extract
 # suggest completions
-antigen bundle zsh-users/zsh-autosuggestions
+# antigen bundle zsh-users/zsh-autosuggestions
 # find any part of the history in shell
 antigen bundle history-substring-search
 # print battery info with battery_pct, battery_time_remaining, etc.  See script for details
