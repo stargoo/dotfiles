@@ -485,8 +485,8 @@ autocmd FilterWritePre * call SetDiffColors()
 
 " source local vimrc for propietary values
 if has("win32")
-  if filereadable(glob("$HOME\.dotfiles\.local.vimrc"))
-    source $HOME\.dotfiles\.local.vimrc
+  if filereadable(expand("~/.dotfiles/.local.vimrc"))
+    source $HOME/.dotfiles/.local.vimrc
   endif
 else
   if filereadable(glob("$HOME/.dotfiles/.local.vimrc"))
