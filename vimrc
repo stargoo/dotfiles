@@ -144,6 +144,8 @@ Plugin 'vim-scripts/ZoomWin'
 Plugin 'ervandew/supertab'
 " alignment
 Plugin 'godlygeek/tabular'
+" a theme
+Plugin 'NLKNguyen/papercolor-theme'
 if has("mac") || has("macunix")
     Plugin 'vim-scripts/textutil.vim'
 endif

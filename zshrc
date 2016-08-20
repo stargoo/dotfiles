@@ -62,7 +62,7 @@ antigen bundle vi-mode
 # websearch from the command line
 antigen bundle web-search
 # bookmarks
-antigen bundle jump
+# antigen bundle jump
 # the best theme for me
 antigen theme pygmalion
 antigen apply
@@ -83,7 +83,9 @@ dls () {
 }
 
 # may want to try the jump plugin, which basically does the same thing.
-# source ~/.dotfiles/.bookmarks.zsh
+source ~/.dotfiles/.bookmarks.zsh
+# my easy cd for windows paths
+source ~/.dotfiles/.cdwin.zsh
 
 # auto start tmux only when someone ssh's into the system
 if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" != "" ]]; then
