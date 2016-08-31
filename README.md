@@ -34,6 +34,9 @@
 
 7. run ``rcup -v``
 
+8. start vim and run command
+    
+     ``:PluginInstall``
 
 ## TODO
 1. create script to auto install antigen and rcm
