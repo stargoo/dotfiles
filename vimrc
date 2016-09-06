@@ -135,7 +135,7 @@ Plugin 'rking/ag.vim'
 " quick file searching
 Plugin 'ctrlpvim/ctrlp.vim'
 " extend ctrlp
-Plugin 'tachiroy/ctrlp-funky'
+Plugin 'tacahiroy/ctrlp-funky'
 " treat camelCase as separate words
 Plugin 'bkad/CamelCaseMotion'
 " zoom into windows
