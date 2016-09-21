@@ -1,5 +1,5 @@
 function cdwin(){
-    drive=$1[1]
+    drive=${1:0:1}
     if [[ $drive =~ "m" || $drive =~ "M" ]]; then
         line=$(sed -e 's#^[Mm]:#/home/scott/mdrive#' -e 's#\\#/#g' <<< "$1")
     elif [[ $drive =~ "u" || $drive =~ "U" ]]; then
