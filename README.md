@@ -37,6 +37,9 @@
 8. start vim and run command
     
      ``:PluginInstall``
+     
+9. install sag if you haven't already.  
+     ``https://github.com/sampson-chen/sack``
 
 ## TODO
 1. create script to auto install antigen and rcm
