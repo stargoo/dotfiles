@@ -22,7 +22,7 @@
         
     Arch:
        
-        ``skip for Arch Linux``
+        skip for Arch Linux
 
 3. install [vundle](https://github.com/VundleVim/Vundle.vim):
 
@@ -40,7 +40,7 @@
     
     Mac and CentOS:
     
-        run ``rcup -v``
+        rcup -v
 
     Arch:
     
@@ -49,7 +49,7 @@
         
 8. start vim and run command
     
-     ``:PluginInstall``
+        :PluginInstall
 
 9. Install tmux plugins
 
