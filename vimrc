@@ -131,7 +131,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " silver searcher
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 " quick file searching
 Plugin 'ctrlpvim/ctrlp.vim'
 " extend ctrlp
