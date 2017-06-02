@@ -55,8 +55,16 @@
 
         ctrl-f I
 
+9. install various tools:
+    
+        the_silver_searcher
+        atool
+        
 9. install sag if you haven't already.  
      ``https://github.com/sampson-chen/sack``
+
+10. mv /home/username/bin/sag to /usr/local/bin/sag or update the path variable
+
 
 ## TODO
 1. create script to auto install antigen and rcm
