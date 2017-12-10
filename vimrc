@@ -315,6 +315,9 @@ map <leader>ev :vsplit $MYVIMRC<cr>
 " source .vimrc
 map <leader>sv :source $MYVIMRC<cr>
 
+"turn off highlights
+map <leader>ks :noh<cr>
+
 " SBG END mappings }}}
 
 " Clear search buffer
