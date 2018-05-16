@@ -2,7 +2,7 @@
 source ~/.antigen/antigen.zsh
 
 # TODO exports may be better served with a .locally sourced file
-export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/bin:~/bin:$PATH
 export ZSH="$HOME/.zsh"
 
 # differ between linux and osx systems
@@ -58,7 +58,7 @@ antigen bundle rsync
 # sudo the last command with Esc-Esc
 antigen bundle sudo
 # more vi stuff
-antigen bundle vi-mode
+# antigen bundle vi-mode
 # websearch from the command line
 antigen bundle web-search
 # bookmarks
@@ -83,9 +83,9 @@ dls () {
 }
 
 # may want to try the jump plugin, which basically does the same thing.
-source ~/.dotfiles/.bookmarks.zsh
-# my easy cd for windows paths
-source ~/.dotfiles/.cdwin.zsh
+source ~/.dotfiles/bookmarks.zsh
+# any kind of function that will work across platforms
+source ~/.dotiles/zshfuncs.zsh
 
 # auto start tmux only when someone ssh's into the system
 if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" != "" ]]; then
@@ -100,8 +100,10 @@ if [[ "$TERM" != "screen" ]] && [[ "$SSH_CONNECTION" != "" ]]; then
 else
   # One might want to do other things in this case
 fi
-if [[ -f "$HOME/.dotfiles/.local.zshrc" ]]; then
-  source "$HOME/.dotfiles/.local.zshrc"
+if [[ -f "$HOME/.dotfiles/local.zshrc" ]]; then
+  source "$HOME/.dotfiles/local.zshrc"
 fi
-
+if [[ -f "$HOME/.dotfiles/local.functions.zshrc" ]]; then
+  source "$HOME/.dotfiles/local.functions.zshrc"
+fi
 

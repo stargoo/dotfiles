@@ -172,6 +172,8 @@ Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'tpope/vim-vinegar'
 " diff two parts of same file
 Plugin 'AndrewRadev/linediff.vim'
+" show marks in the gutter - doesn't work too well
+" Plugin 'kshenoy/vim-signature'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 set nocp
@@ -199,7 +201,7 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) 
 nnoremap cct :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 " add current directory's generated tags file to available tags
 map act :set tags+=./tags <CR>
-
+set tags+=/home/sie/Perforce/mainLinux/ssd/FW_TEST/dev/Testbase/tags
 
 "Theme
 set background=dark
@@ -303,6 +305,17 @@ nnoremap <leader>f :nohl<cr>
 vnoremap j j$
 vnoremap G G$
 
+" below is for issues with ctrl-left arrow where it will delete text
+imap [1;5D <ESC>
+imap [1;5C <ESC>
+nmap [1;5D <ESC>
+nmap [1;5C <ESC>
+vmap [1;5D <ESC>
+vmap [1;5C <ESC>
+
+" convert binary to hex
+nnoremap <leader>th :%!xxd<cr>
+
 " last word to all UPPERS in insert mode
 "inoremap <c-u> <esc>viwUA
 
@@ -363,10 +376,10 @@ map <Leader>rl :w<cr>:exe "!rspec %" . ":" . line(".")<cr>
 map <Leader>rt :w<cr>:!rspec --format nested<cr>
 
 " Run currently open cucumber feature file
-map <Leader>cf :w<cr>:!cucumber %<cr>
+"map <Leader>cf :w<cr>:!cucumber %<cr>
 
 " Run current cucumber scenario
-map <Leader>cl :w<cr>:exe "!cucumber %" . ":" . line(".")<cr>
+"map <Leader>cl :w<cr>:exe "!cucumber %" . ":" . line(".")<cr>
 
 " Run all cucumber feature files
 map <Leader>ct :w<cr>:!cucumber<cr>
@@ -427,10 +440,10 @@ autocmd Bufread,BufNewFile *.md set filetype=markdown " Vim interprets .md as 'm
 " Highlight words to avoid in tech writing
 " http://css-tricks.com/words-avoid-educational-writing/
 highlight TechWordsToAvoid ctermbg=red ctermfg=white
-match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy/
-autocmd BufWinEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
-autocmd InsertEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
-autocmd InsertLeave * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\| just \|everyone\sknows\|however\|so,\|easy/
+autocmd BufWinEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\| just \|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\| just \|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertLeave * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\| just \|everyone\sknows\|however,\|so,\|easy/
 autocmd BufWinLeave * call clearmatches()
 
 " Create a 'scratch buffer' which is a temporary buffer Vim wont ask to save
@@ -498,4 +511,40 @@ else
     source $HOME/.dotfiles/.local.vimrc
   endif
 endif
+
+command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
+function! s:Dec2hex(line1, line2, arg) range
+  if empty(a:arg)
+    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
+      let cmd = 's/\%V\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
+    else
+      let cmd = 's/\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
+    endif
+    try
+      execute a:line1 . ',' . a:line2 . cmd
+    catch
+      echo 'Error: No decimal number found'
+    endtry
+  else
+    echo printf('%x', a:arg + 0)
+  endif
+endfunction
+
+command! -nargs=? -range Hex2dec call s:Hex2dec(<line1>, <line2>, '<args>')
+function! s:Hex2dec(line1, line2, arg) range
+  if empty(a:arg)
+    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
+      let cmd = 's/\%V0x\x\+/\=submatch(0)+0/g'
+    else
+      let cmd = 's/0x\x\+/\=submatch(0)+0/g'
+    endif
+    try
+      execute a:line1 . ',' . a:line2 . cmd
+    catch
+      echo 'Error: No hex number starting "0x" found'
+    endtry
+  else
+    echo (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
+  endif
+endfunction
 " }}}
